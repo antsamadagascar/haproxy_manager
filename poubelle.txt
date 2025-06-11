@@ -1,0 +1,70 @@
+global
+        log /dev/log    local0
+        log /dev/log    local1 notice
+        chroot /var/lib/haproxy
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+        stats timeout 30s
+        user haproxy
+        group haproxy
+        daemon
+        
+        # Default SSL material locations
+        ca-base /etc/ssl/certs
+        crt-base /etc/ssl/private
+
+        # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:>
+        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+        ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        je travaille dans php code igniter 3 et linux ubuntu.
+Je fais une application web pour modiffier le contenu d'un fichier de configuration de haproxy.
+
+Voici une fonction pour ajouter un serveur dans la section 'Http_Back':
+'public function add_server($haproxy_config_file, $form_data) {
+        // Préparer la ligne à ajouter
+        $new_line = "    server {$form_data['new-server-name']} {$form_data['new-server-address']} {$form_data['check']}";
+
+        // Lire le fichier de configuration existant
+        $config_data = file($haproxy_config_file, FILE_IGNORE_NEW_LINES);
+
+        // Identifier les lignes de la section 'http_back'
+        $http_back_start_index = array_search('backend http_back', $config_data);
+        if ($http_back_start_index !== false) {
+            // Rechercher la fin de la section 'http_back'
+            $http_back_end_index = $http_back_start_index + 1;
+            while ($http_back_end_index <= count($config_data)-1 && preg_match('/^\s+/', $config_data[$http_back_end_index])) {
+                $http_back_end_index++;
+            }
+
+            // Insérer la nouvelle ligne à la fin de la section 'http_back'
+            array_splice($config_data, $http_back_end_index, 0, $new_line."\n");
+
+            // Sauvegarder les modifications dans le fichier
+            if (file_put_contents($haproxy_config_file, implode("\n", $config_data))) {
+                return true; // Succès
+            } else {
+                return false; // Erreur de sauvegarde
+            }
+        } else {
+            return false; // Section 'http_back' introuvable
+        }
+    }'.
+
+Je veux une fonction, sans view ni controller pour effacer un serveur dans la section 'Http_Back' du fichier de configuration de haproxy.

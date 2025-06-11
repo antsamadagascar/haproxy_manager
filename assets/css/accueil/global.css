@@ -1,0 +1,23 @@
+/* styles/main.css */
+body {
+    padding: 20px;
+    font-family: monospace;
+    background-color: #f8f9fa;
+}
+
+pre {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    overflow-x: auto;
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.container {
+    margin-top: 50px;
+}
